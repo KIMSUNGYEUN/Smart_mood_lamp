@@ -1,3 +1,4 @@
+//밝기 조절
 package com.example.smart_mood_lamp;
 
 import android.os.Bundle;
