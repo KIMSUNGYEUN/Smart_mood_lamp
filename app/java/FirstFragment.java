@@ -1,4 +1,4 @@
-//블루투스 연결
+//메인화면
 package com.example.smart_mood_lamp;
 
 import android.os.Bundle;
