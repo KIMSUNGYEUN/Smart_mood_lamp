@@ -1,4 +1,4 @@
-//메인화면
+//수정중
 package com.example.smart_mood_lamp;
 
 import android.os.Bundle;
