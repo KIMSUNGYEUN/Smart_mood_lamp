@@ -1,5 +1,5 @@
 package com.example.smart_mode_lampes;
-
+///연결
 import android.bluetooth.BluetoothSocket;
 import android.os.SystemClock;
 
