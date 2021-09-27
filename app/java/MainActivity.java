@@ -3,6 +3,7 @@ package com.example.smart_mode_lampes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,16 +36,16 @@ import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
+    //FragmentLight fragmentLight;
+    //FragmentStatus fragmentStatus;
 
-    FragmentLight fragmentLight;
-    FragmentStatus fragmentStatus;
-    /*//블루투스
+    //블루투스
     String TAG = "MainActivity";
     UUID BT_MODULE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
 
     int status = 0;
     TextView textStatus;
-    Button btnParied, btnSearch, btnSend;
+    Button btnParied, btnSearch, btnmove;
     ListView listView;
 
     BluetoothAdapter btAdapter;
@@ -54,17 +56,18 @@ public class MainActivity extends AppCompatActivity {
     private final static int REQUEST_ENABLE_BT = 1;
     BluetoothSocket btSocket = null;
     ConnectedThread connectedThread;
-*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       fragmentLight = new FragmentLight();
-       fragmentStatus = new FragmentStatus();
+       //fragmentLight = new FragmentLight();
+       //fragmentStatus = new FragmentStatus();
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
+
+        /*//getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
-/*
+        });*/
+
         //위치권한 허용 코드
         String[] permission_list = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         textStatus = (TextView) findViewById(R.id.text_status);
         btnParied = (Button) findViewById(R.id.btn_paired);
         btnSearch = (Button) findViewById(R.id.btn_search);
-        btnSend = (Button) findViewById(R.id.btn_send);
+        btnmove = (Button) findViewById(R.id.btn_move);
         listView = (ListView) findViewById(R.id.listview);
 
         //페어링된 디바이스 보여주기
@@ -107,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
         deviceAddressArray = new ArrayList<>();
         listView.setAdapter(btArrayAdapter);
 
-        listView.setOnItemClickListener(new myOnItemClickListener());*/
+        listView.setOnItemClickListener(new myOnItemClickListener());
     }
-/*
+
     public void onClickButtonPaired(View view){
         btArrayAdapter.clear();
         if(deviceAddressArray!=null && !deviceAddressArray.isEmpty()){ deviceAddressArray.clear(); }
@@ -145,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickButtonMove(View view){
+        Intent intent = new Intent(getApplicationContext(), test.class);
+        startActivity(intent);
+    }
+
+/*
     //문자 보내기 "문이 닫혔습니다."/"문이 열렸습니다."
     public void onClickButtonSend(View view){
         if(connectedThread!=null && status != 1){
@@ -158,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             status = 0;
         }
     }
-
+*/
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -226,12 +235,8 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "Could not create Insecure RFComm Connection",e);
         }
         return  device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
-    }*/
+    }
 }
-
-
-
-
 
 ////////////////////////////////////////////////////
 /*package com.example.smart_mode_lampes;
