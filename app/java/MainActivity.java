@@ -36,8 +36,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-    //FragmentLight fragmentLight;
-    //FragmentStatus fragmentStatus;
+    FragmentLight fragmentLight;
+    FragmentStatus fragmentStatus;
 
     //블루투스
     String TAG = "MainActivity";
@@ -63,26 +63,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       //fragmentLight = new FragmentLight();
-       //fragmentStatus = new FragmentStatus();
+       fragmentLight = new FragmentLight();
+       fragmentStatus = new FragmentStatus();
 
 
-        /*//getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.page_control:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
+                        Intent intent = new Intent(getApplicationContext(), test.class);
+                        startActivity(intent);
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
                         return true;
                     case R.id.page_status:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentStatus).commit();
+                        Intent intent2 = new Intent(getApplicationContext(), test2.class);
+                        startActivity(intent2);
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentStatus).commit();
                         return true;
                 }
                 return false;
             }
-        });*/
+        });
 
         //위치권한 허용 코드
         String[] permission_list = {
@@ -237,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
         return  device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
     }
 }
-
 ////////////////////////////////////////////////////
 /*package com.example.smart_mode_lampes;
 
