@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <solid
-        android:color="@android:color/black"/>
-    //인터페이스를 검은 색 동그라미로 표시
-</shape>
