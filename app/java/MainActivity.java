@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -36,8 +37,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-    FragmentLight fragmentLight;
-    FragmentStatus fragmentStatus;
+
+    public static Activity firstActivity;
 
     //블루투스
     String TAG = "MainActivity";
@@ -57,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
     BluetoothSocket btSocket = null;
     ConnectedThread connectedThread;
 
+    private BackPressHandler backPressHandler = new BackPressHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       fragmentLight = new FragmentLight();
-       fragmentStatus = new FragmentStatus();
-
+        firstActivity = MainActivity.this;
 
         //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -73,15 +74,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.page_control:
-                        Intent intent = new Intent(getApplicationContext(), test.class);
-                        startActivity(intent);
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentLight).commit();
+                    case R.id.page_home:
                         return true;
+
+                    case R.id.page_control:
+                        Intent intent = new Intent(getApplicationContext(), Light_Control.class);
+                        startActivity(intent);
+                        finish();
+                        return true;
+
                     case R.id.page_status:
-                        Intent intent2 = new Intent(getApplicationContext(), test2.class);
+                        Intent intent2 = new Intent(getApplicationContext(), Show_Status.class);
                         startActivity(intent2);
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentStatus).commit();
+                        finish();
                         return true;
                 }
                 return false;
@@ -153,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickButtonMove(View view){
-        Intent intent = new Intent(getApplicationContext(), test.class);
+        Intent intent = new Intent(getApplicationContext(), Light_Control.class);
         startActivity(intent);
     }
 
@@ -192,9 +197,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        try {
+            unregisterReceiver(receiver);
+        }catch (IllegalArgumentException e){
+        }catch (Exception e){
+        }finally {
+        }
+            // Don't forget to unregister the ACTION_FOUND receiver.
 
-        // Don't forget to unregister the ACTION_FOUND receiver.
-        unregisterReceiver(receiver);
     }
 
     public class myOnItemClickListener implements AdapterView.OnItemClickListener {
@@ -240,7 +250,15 @@ public class MainActivity extends AppCompatActivity {
         }
         return  device.createRfcommSocketToServiceRecord(BT_MODULE_UUID);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Default
+        backPressHandler.onBackPressed();
+    }
 }
+
+
 ////////////////////////////////////////////////////
 /*package com.example.smart_mode_lampes;
 
