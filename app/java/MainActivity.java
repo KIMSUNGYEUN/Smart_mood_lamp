@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     int status = 0;
     TextView textStatus;
-    Button btnParied, btnSearch, btnmove;
+    Button btnParied, btnSearch, btncontrol;
     ListView listView;
 
     BluetoothAdapter btAdapter;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         textStatus = (TextView) findViewById(R.id.text_status);
         btnParied = (Button) findViewById(R.id.btn_paired);
         btnSearch = (Button) findViewById(R.id.btn_search);
-        btnmove = (Button) findViewById(R.id.btn_move);
+        btncontrol = (Button) findViewById(R.id.btn_control);
         listView = (ListView) findViewById(R.id.listview);
 
         //페어링된 디바이스 보여주기
@@ -157,26 +157,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickButtonMove(View view){
-        Intent intent = new Intent(getApplicationContext(), Light_Control.class);
-        startActivity(intent);
-    }
 
-/*
-    //문자 보내기 "문이 닫혔습니다."/"문이 열렸습니다."
+
+    //문자 보내기 "자동 조절 중입니다."/"자동 조절을 중지합니다."
     public void onClickButtonSend(View view){
         if(connectedThread!=null && status != 1){
-            connectedThread.write("c");
-            Toast.makeText(getApplicationContext(), "문이 닫혔습니다.", Toast.LENGTH_SHORT).show();
+            connectedThread.write("o");
+            Toast.makeText(getApplicationContext(), "자동 조절 중입니다.", Toast.LENGTH_SHORT).show();
             status = 1;
         }
         else if(connectedThread!=null && status != 0){
-            connectedThread.write("o");
-            Toast.makeText(getApplicationContext(), "문이 열렸습니다.", Toast.LENGTH_SHORT).show();
+            connectedThread.write("c");
+            Toast.makeText(getApplicationContext(), "자동 조절을 중지합니다.", Toast.LENGTH_SHORT).show();
             status = 0;
         }
     }
-*/
+
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
