@@ -29,12 +29,24 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        android:layout_alignParentBottom="true"
+        android:background="#345E86"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="#f6d170"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent" />
+<!--
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="@drawable/menu_selector_color"
         app:itemTextColor="@drawable/menu_selector_color"
         app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
     //상태 출력
     <TextView
@@ -68,11 +80,11 @@
         app:layout_constraintTop_toBottomOf="@id/text_status" />
     //화면이동
     <Button
-        android:id="@+id/btn_move"
-        android:text="밝기 조절"
+        android:id="@+id/btn_control"
+        android:text="자동 밝기 조절"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:onClick="onClickButtonMove"
+        android:onClick="onClickButtonSend"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_search"/>
@@ -83,6 +95,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_move"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_control"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
