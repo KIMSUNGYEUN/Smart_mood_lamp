@@ -1,5 +1,5 @@
 package com.example.smart_mode_lampes;
-
+///
 import android.app.Activity;
 import android.widget.Toast;
 
