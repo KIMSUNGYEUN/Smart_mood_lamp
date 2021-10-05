@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Show_Status extends AppCompatActivity {
+    ConnectedThread connectedThread;
     public static Activity thirdActivity;
+    TextView textView;
 
     private BackPressHandler backPressHandler = new BackPressHandler(this);
 
@@ -20,6 +26,27 @@ public class Show_Status extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_status);
+
+        textView = findViewById(R.id.textView);
+
+        SeekBar seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textView.setText(String.format("선택된 밝기는 %d 입니다.",seekBar
+                .getProgress()));
+            }
+        });
 
         thirdActivity = Show_Status.this;
 
@@ -53,6 +80,5 @@ public class Show_Status extends AppCompatActivity {
         // Default
         backPressHandler.onBackPressed();
     }
-
 
 }
