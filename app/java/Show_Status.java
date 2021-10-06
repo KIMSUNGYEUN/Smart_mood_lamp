@@ -43,7 +43,7 @@ public class Show_Status extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                textView.setText(String.format("선택된 밝기는 %d 입니다.",seekBar
+                textView.setText(String.format("현재 선택된 밝기는 %d 입니다.",seekBar
                 .getProgress()));
             }
         });
