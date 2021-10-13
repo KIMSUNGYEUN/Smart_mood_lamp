@@ -1,0 +1,96 @@
+/*#include <SoftwareSerial.h>
+#include <Adafruit_NeoPixel.h>
+
+#define PIN 6
+//첫번째 인자값은 네오픽셀의 LED의 개수
+//두번째 인자값은 네오픽셀이 연결된 아두이노의 핀번호
+//세번째 인자값은 네오픽셀의 타입에 따라 바뀌는 flag
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, PIN, NEO_GRB + NEO_KHZ800);
+
+int servoPin = 9;
+int TX = 2;
+int RX = 3;
+SoftwareSerial bluetooth(TX,RX);
+
+void setup() {
+  bluetooth.begin(9600);
+}
+
+void loop() {
+  strip.begin(); //네오픽셀을 초기화하기 위해 모든LED를 off시킨다
+  strip.show();
+  while(bluetooth.available()){
+    char data = bluetooth.read();
+    //Serial.print(bluetooth.read()); // 시리얼 모니터에 데이터 출력
+    if(data == 'c'){
+        servo.write(90); 
+    }
+    else if(data == 'o'){
+        servo.write(40);
+    }
+
+    if(data == 'c'){
+        servo.write(90); 
+    }
+    else if(data == 'o'){
+        servo.write(40);
+    }
+
+    if(data == 'c'){
+        servo.write(90); 
+    }
+    else if(data == 'o'){
+        servo.write(40);
+    }
+
+    if(data == 'c'){
+        servo.write(90); 
+    }
+    else if(data == 'o'){
+        servo.write(40);
+    }
+  }
+}*/
+
+//네오픽셀 테스트
+#include <Adafruit_NeoPixel.h>   // 네오픽셀 라이브러리를 불러옵니다.
+
+#define PIN 6                      // 디지털핀 어디에 연결했는지 입력
+#define LEDNUM 8                  // 연결된 네오픽셀의 숫자입력
+#define BRIGHTNESS 50               // 네오픽셀의 밝기를 설정합니다. (0~255)
+//첫번째 인자값은 네오픽셀의 LED의 개수
+//두번째 인자값은 네오픽셀이 연결된 아두이노의 핀번호
+//세번째 인자값은 네오픽셀의 타입에 따라 바뀌는 flag
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(LEDNUM, PIN, NEO_GRBW + NEO_KHZ800);
+
+void setup() {
+  strip.setBrightness(BRIGHTNESS);
+}
+
+void loop() {                              // 이 안에 입력한 내용들이 반복 실행됩니다
+  strip.begin();                           // 네오픽셀 제어시작
+  strip.show();                            // 네오픽셀 초기화
+  strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+}
+
+/*//블루투스 테스트
+#include <SoftwareSerial.h>
+
+int RX=7;
+int TX=8;
+
+SoftwareSerial bluetooth(RX, TX);
+
+void setup(){
+  Serial.begin(9600);
+  bluetooth.begin(9600);
+}
+ 
+void loop(){
+  if (bluetooth.available()) {
+    Serial.write(bluetooth.read());
+  }
+  if (Serial.available()) {
+    bluetooth.write(Serial.read());
+  }
+}*/
