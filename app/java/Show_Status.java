@@ -1,5 +1,5 @@
 package com.example.smart_mode_lampes;
-
+//사용자 밝기 설정
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
