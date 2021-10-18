@@ -22,31 +22,32 @@ void loop() {
   while(bluetooth.available()){
     char data = bluetooth.read();
     //Serial.print(bluetooth.read()); // 시리얼 모니터에 데이터 출력
-    if(data == 'c'){
+    //자동모드
+    if(data == 'o'){
         servo.write(90); 
     }
-    else if(data == 'o'){
+    else if(data == 'c'){
         servo.write(40);
     }
-
-    if(data == 'c'){
+    //캠핑모드
+    if(data == 'm'){
         servo.write(90); 
     }
-    else if(data == 'o'){
+    else if(data == 'c'){
         servo.write(40);
     }
-
-    if(data == 'c'){
+    //수면모드
+    if(data == 's'){
         servo.write(90); 
     }
-    else if(data == 'o'){
+    else if(data == 'c'){
         servo.write(40);
     }
-
-    if(data == 'c'){
+    //독서모드
+    if(data == 'r'){
         servo.write(90); 
     }
-    else if(data == 'o'){
+    else if(data == 'c'){
         servo.write(40);
     }
   }
