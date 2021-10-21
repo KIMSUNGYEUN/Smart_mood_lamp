@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.smart_mode_lampes.Light_Control">
-//추가기능
+
     <TextView
         android:id="@+id/text_light"
         android:layout_width="wrap_content"
@@ -83,6 +83,34 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_control1" />
     </GridLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/Img1"
+            android:layout_width="144dp"
+            android:layout_height="171dp"
+            android:layout_gravity="center"
+            android:src="@drawable/독서용"
+            android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/Img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/수면용"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/Img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/캠핑용"
+            android:visibility="visible" />
+    </FrameLayout>
     <!--
     <Button
         android:id="@+id/btn_control"
