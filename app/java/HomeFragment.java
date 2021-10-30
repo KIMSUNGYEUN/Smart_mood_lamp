@@ -103,7 +103,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("c");
+            connectedThread.write("oc");
             Toast.makeText(requireActivity(), "자동 조절을 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
