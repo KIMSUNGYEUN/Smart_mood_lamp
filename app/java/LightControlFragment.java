@@ -36,7 +36,7 @@ public class LightControlFragment extends BaseFragment {
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("c");
+            connectedThread.write("mc");
             Toast.makeText(requireActivity(), "캠핑모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
@@ -51,7 +51,7 @@ public class LightControlFragment extends BaseFragment {
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("c");
+            connectedThread.write("sc");
             Toast.makeText(requireActivity(), "수면모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
@@ -66,12 +66,13 @@ public class LightControlFragment extends BaseFragment {
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("c");
+            connectedThread.write("rc");
             Toast.makeText(requireActivity(), "독서모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
 }
+
 
 
 /*
