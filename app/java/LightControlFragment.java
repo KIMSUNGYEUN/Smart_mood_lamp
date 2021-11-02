@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class LightControlFragment extends BaseFragment {
+
+    private ImageView imageView1, imageView2, imageView3, imageView4;
 
     @Nullable
     @Override
@@ -25,6 +28,11 @@ public class LightControlFragment extends BaseFragment {
         view.findViewById(R.id.btn_control1).setOnClickListener(this::onClickButtonSend1);
         view.findViewById(R.id.btn_control2).setOnClickListener(this::onClickButtonSend2);
         view.findViewById(R.id.btn_control3).setOnClickListener(this::onClickButtonSend3);
+
+        imageView1 = view.findViewById(R.id.Img1);
+        imageView2 = view.findViewById(R.id.Img2);
+        imageView3 = view.findViewById(R.id.Img3);
+        imageView4 = view.findViewById(R.id.Img4);
     }
 
     public void onClickButtonSend1(View view) {
@@ -32,11 +40,19 @@ public class LightControlFragment extends BaseFragment {
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             connectedThread.write("m");
+            imageView1.setVisibility(View.VISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            imageView3.setVisibility(View.INVISIBLE);
+            imageView4.setVisibility(View.INVISIBLE);
             Toast.makeText(requireActivity(), "캠핑모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
             connectedThread.write("mc");
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            imageView3.setVisibility(View.INVISIBLE);
+            imageView4.setVisibility(View.VISIBLE);
             Toast.makeText(requireActivity(), "캠핑모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
@@ -47,11 +63,19 @@ public class LightControlFragment extends BaseFragment {
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             connectedThread.write("s");
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.VISIBLE);
+            imageView3.setVisibility(View.INVISIBLE);
+            imageView4.setVisibility(View.INVISIBLE);
             Toast.makeText(requireActivity(), "수면모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
             connectedThread.write("sc");
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            imageView3.setVisibility(View.INVISIBLE);
+            imageView4.setVisibility(View.VISIBLE);
             Toast.makeText(requireActivity(), "수면모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
@@ -62,16 +86,25 @@ public class LightControlFragment extends BaseFragment {
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             connectedThread.write("r");
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            imageView3.setVisibility(View.VISIBLE);
+            imageView4.setVisibility(View.INVISIBLE);
             Toast.makeText(requireActivity(), "독서모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
             connectedThread.write("rc");
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            imageView3.setVisibility(View.INVISIBLE);
+            imageView4.setVisibility(View.VISIBLE);
             Toast.makeText(requireActivity(), "독서모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
 }
+
 
 
 
