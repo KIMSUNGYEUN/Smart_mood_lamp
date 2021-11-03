@@ -14,47 +14,48 @@ SoftwareSerial bluetooth(TX,RX);
 
 void setup() {
   bluetooth.begin(9600);
+  strip.setBrightness(BRIGHTNESS);
 }
 
 void loop() {
-  strip.begin(); //네오픽셀을 초기화하기 위해 모든LED를 off시킨다
-  strip.show();
+   strip.begin();                           // 네오픽셀 제어시작
+  strip.show();                            // 네오픽셀 초기화
   while(bluetooth.available()){
     char data = bluetooth.read();
     //Serial.print(bluetooth.read()); // 시리얼 모니터에 데이터 출력
     //자동모드
     if(data == 'o'){
-        servo.write(90); 
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     else if(data == 'c'){
-        servo.write(40);
+       strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     //캠핑모드
     if(data == 'm'){
-        servo.write(90); 
+       strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     else if(data == 'c'){
-        servo.write(40);
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     //수면모드
     if(data == 's'){
-        servo.write(90); 
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     else if(data == 'c'){
-        servo.write(40);
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     //독서모드
     if(data == 'r'){
-        servo.write(90); 
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
     else if(data == 'c'){
-        servo.write(40);
+        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
     }
   }
 }*/
 
 //네오픽셀 테스트
-#include <Adafruit_NeoPixel.h>   // 네오픽셀 라이브러리를 불러옵니다.
+/*#include <Adafruit_NeoPixel.h>   // 네오픽셀 라이브러리를 불러옵니다.
 
 #define PIN 6                      // 디지털핀 어디에 연결했는지 입력
 #define LEDNUM 8                  // 연결된 네오픽셀의 숫자입력
@@ -72,9 +73,9 @@ void loop() {                              // 이 안에 입력한 내용들이 
   strip.begin();                           // 네오픽셀 제어시작
   strip.show();                            // 네오픽셀 초기화
   strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
-}
+}*/
 
-/*//블루투스 테스트
+//블루투스 테스트
 #include <SoftwareSerial.h>
 
 int RX=7;
@@ -88,10 +89,13 @@ void setup(){
 }
  
 void loop(){
+  int cds = analogRead(A1);
+  delay(100);
+  Serial.println(cds);
   if (bluetooth.available()) {
     Serial.write(bluetooth.read());
   }
   if (Serial.available()) {
     bluetooth.write(Serial.read());
   }
-}*/
+}
