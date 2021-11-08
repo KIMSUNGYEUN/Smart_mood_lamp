@@ -1,19 +1,30 @@
 package com.example.smart_mode_lampes;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class ShowStatusFragment extends BaseFragment {
+public class ShowStatusFragment extends BaseFragment implements SensorEventListener {
 
     TextView textView;
-
+    TextView textView2;
+    ///조도
+    private SensorManager sensorManager;
+    private Sensor lightSensor;
+    private String light = "";
+    ///
 
     @Nullable
     @Override
@@ -26,9 +37,20 @@ public class ShowStatusFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        view.findViewById(R.id.setting).setOnClickListener(this::onClickButtonSend4);
+        view.findViewById(R.id.check).setOnClickListener(this::onClickButtonSend5);
+
         textView = view.findViewById(R.id.textView);
+        textView2 = view.findViewById(R.id.textView2);
 
         SeekBar seekBar = view.findViewById(R.id.seekBar);
+
+        ///조도센서
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if( lightSensor == null )
+            Toast.makeText(requireActivity(), "No Light Sensor Found!", Toast.LENGTH_SHORT).show();
+        ///
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -47,6 +69,49 @@ public class ShowStatusFragment extends BaseFragment {
             }
         });
     }
+    ///조도
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    ///
+    public void onClickButtonSend4(View view) {
+        ConnectedThread connectedThread = getConnectedThread();
+
+        if (connectedThread != null && model.getStatus().getValue() != 1) {
+            connectedThread.write("cb");
+            Toast.makeText(requireActivity(), "해당밝기로 설정합니다.", Toast.LENGTH_SHORT).show();
+            model.setStatus(1);
+
+        } else if (connectedThread != null && model.getStatus().getValue() != 0) {
+            connectedThread.write("cbc");
+            Toast.makeText(requireActivity(), "해당밝기 설정을 중지합니다.", Toast.LENGTH_SHORT).show();
+            model.setStatus(0);
+        }
+    }
+
+    public void onClickButtonSend5(View view) {
+        ConnectedThread connectedThread = getConnectedThread();
+
+        if (connectedThread != null && model.getStatus().getValue() != 1) {
+            connectedThread.write(light);
+            textView.setText(String.format("현재 선택된 밝기는 %d 입니다.", light));
+        }
+    }
+    ////조도
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if( event.sensor.getType() == Sensor.TYPE_LIGHT){
+            light = String.valueOf(event.values[0]);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+    /////
 }
 
 
