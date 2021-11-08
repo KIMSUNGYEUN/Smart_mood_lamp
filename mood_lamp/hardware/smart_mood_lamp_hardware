@@ -89,9 +89,9 @@ void setup(){
 }
  
 void loop(){
-  int cds = analogRead(A1);
-  delay(100);
-  Serial.println(cds);
+  /*int cds = analogRead(A1);
+  delay(1000);
+  Serial.println(cds);*/
   if (bluetooth.available()) {
     Serial.write(bluetooth.read());
   }
