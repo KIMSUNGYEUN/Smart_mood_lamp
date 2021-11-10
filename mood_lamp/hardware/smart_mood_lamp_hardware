@@ -72,7 +72,7 @@ void setup() {
 void loop() {                              // 이 안에 입력한 내용들이 반복 실행됩니다
   strip.begin();                           // 네오픽셀 제어시작
   strip.show();                            // 네오픽셀 초기화
-  strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+  strip.setPixelColor(0, 0, 0, 0, 100);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
   strip.setPixelColor(1, 0, 0, 0, 10);
   strip.setPixelColor(2, 0, 0, 0, 10);
   strip.setPixelColor(3, 0, 0, 0, 10);
