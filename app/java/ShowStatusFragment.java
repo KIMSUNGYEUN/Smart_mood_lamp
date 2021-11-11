@@ -96,7 +96,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             connectedThread.write(light);
-            textView.setText(String.format("현재 선택된 밝기는 %d 입니다.", light));
+            textView2.setText(String.format("현재 주위의 밝기는 %d 입니다.", light));
         }
     }
     ////조도
