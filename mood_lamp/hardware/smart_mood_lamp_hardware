@@ -26,34 +26,91 @@ void loop() {
     //자동모드
     if(data == 'o'){
         strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+        strip.setPixelColor(1, 0, 0, 0, );
+        strip.setPixelColor(2, 0, 0, 0, );
+        strip.setPixelColor(3, 0, 0, 0, );
+        strip.setPixelColor(4, 0, 0, 0, );
+        strip.setPixelColor(5, 0, 0, 0, );
+        strip.setPixelColor(6, 0, 0, 0, );
+        strip.setPixelColor(7, 0, 0, 0, );
     }
     else if(data == 'c'){
        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 0);
+       strip.setPixelColor(2, 0, 0, 0, 0);
+       strip.setPixelColor(3, 0, 0, 0, 0);
+       strip.setPixelColor(4, 0, 0, 0, 0);
+       strip.setPixelColor(5, 0, 0, 0, 0);
+       strip.setPixelColor(6, 0, 0, 0, 0);
+       strip.setPixelColor(7, 0, 0, 0, 0);
     }
     //캠핑모드
     if(data == 'm'){
-       strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
     }
-    else if(data == 'c'){
-        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+    else if(data == 'mc'){
+        strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
+        
     }
     //수면모드
     if(data == 's'){
-        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+        strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
     }
-    else if(data == 'c'){
-        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+    else if(data == 'sc'){
+        strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
     }
     //독서모드
     if(data == 'r'){
-        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+        strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
     }
-    else if(data == 'c'){
-        strip.setPixelColor(0, 255, 0, 255, 0);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+    else if(data == 'rc'){
+        strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+       strip.setPixelColor(1, 0, 0, 0, 10);
+       strip.setPixelColor(2, 0, 0, 0, 10);
+       strip.setPixelColor(3, 0, 0, 0, 10);
+       strip.setPixelColor(4, 0, 0, 0, 10);
+       strip.setPixelColor(5, 0, 0, 0, 10);
+       strip.setPixelColor(6, 0, 0, 0, 10);
+       strip.setPixelColor(7, 0, 0, 0, 10);
     }
   }
 }*/
-
+/*
 //네오픽셀 테스트
 #include <Adafruit_NeoPixel.h>   // 네오픽셀 라이브러리를 불러옵니다.
 
@@ -72,7 +129,7 @@ void setup() {
 void loop() {                              // 이 안에 입력한 내용들이 반복 실행됩니다
   strip.begin();                           // 네오픽셀 제어시작
   strip.show();                            // 네오픽셀 초기화
-  strip.setPixelColor(0, 0, 0, 0, 100);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
+  strip.setPixelColor(0, 0, 0, 0, 10);     // (A,R,G,B,W) A번째 LED를 RGBW (0~255) 만큼의 밝기로 켭니다.
   strip.setPixelColor(1, 0, 0, 0, 10);
   strip.setPixelColor(2, 0, 0, 0, 10);
   strip.setPixelColor(3, 0, 0, 0, 10);
@@ -81,7 +138,7 @@ void loop() {                              // 이 안에 입력한 내용들이 
   strip.setPixelColor(6, 0, 0, 0, 10);
   strip.setPixelColor(7, 0, 0, 0, 10);
   
-}
+}*/
 /*
 //블루투스 테스트
 #include <SoftwareSerial.h>
