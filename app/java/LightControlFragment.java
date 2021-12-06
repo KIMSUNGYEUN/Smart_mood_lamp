@@ -12,7 +12,10 @@ import androidx.annotation.Nullable;
 
 public class LightControlFragment extends BaseFragment {
 
+    private int imageIndex;
     private ImageView imageView1, imageView2, imageView3, imageView4;
+
+    Toast mToast;
 
     @Nullable
     @Override
@@ -33,27 +36,29 @@ public class LightControlFragment extends BaseFragment {
         imageView2 = view.findViewById(R.id.Img2);
         imageView3 = view.findViewById(R.id.Img3);
         imageView4 = view.findViewById(R.id.Img4);
+        imageIndex = 0;
     }
 
     public void onClickButtonSend1(View view) {
         ConnectedThread connectedThread = getConnectedThread();
-
+        if( mToast != null ) { mToast.cancel(); }
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             connectedThread.write("m");
             imageView1.setVisibility(View.VISIBLE);
             imageView2.setVisibility(View.INVISIBLE);
             imageView3.setVisibility(View.INVISIBLE);
             imageView4.setVisibility(View.INVISIBLE);
-            Toast.makeText(requireActivity(), "캠핑모드로 설정합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "캠핑모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("mc");
+            if( mToast != null ) { mToast.cancel(); }
+            connectedThread.write("n");
             imageView1.setVisibility(View.INVISIBLE);
             imageView2.setVisibility(View.INVISIBLE);
             imageView3.setVisibility(View.INVISIBLE);
             imageView4.setVisibility(View.VISIBLE);
-            Toast.makeText(requireActivity(), "캠핑모드를 중지합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "캠핑모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
@@ -62,21 +67,23 @@ public class LightControlFragment extends BaseFragment {
         ConnectedThread connectedThread = getConnectedThread();
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write("s");
             imageView1.setVisibility(View.INVISIBLE);
             imageView2.setVisibility(View.VISIBLE);
             imageView3.setVisibility(View.INVISIBLE);
             imageView4.setVisibility(View.INVISIBLE);
-            Toast.makeText(requireActivity(), "수면모드로 설정합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "수면모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("sc");
+            if( mToast != null ) { mToast.cancel(); }
+            connectedThread.write("l");
             imageView1.setVisibility(View.INVISIBLE);
             imageView2.setVisibility(View.INVISIBLE);
             imageView3.setVisibility(View.INVISIBLE);
             imageView4.setVisibility(View.VISIBLE);
-            Toast.makeText(requireActivity(), "수면모드를 중지합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "수면모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
@@ -85,25 +92,28 @@ public class LightControlFragment extends BaseFragment {
         ConnectedThread connectedThread = getConnectedThread();
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write("r");
             imageView1.setVisibility(View.INVISIBLE);
             imageView2.setVisibility(View.INVISIBLE);
             imageView3.setVisibility(View.VISIBLE);
             imageView4.setVisibility(View.INVISIBLE);
-            Toast.makeText(requireActivity(), "독서모드로 설정합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "독서모드로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("rc");
+            if( mToast != null ) { mToast.cancel(); }
+            connectedThread.write("d");
             imageView1.setVisibility(View.INVISIBLE);
             imageView2.setVisibility(View.INVISIBLE);
             imageView3.setVisibility(View.INVISIBLE);
             imageView4.setVisibility(View.VISIBLE);
-            Toast.makeText(requireActivity(), "독서모드를 중지합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "독서모드를 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
 }
+
 
 
 
