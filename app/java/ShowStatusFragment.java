@@ -16,7 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class ShowStatusFragment extends BaseFragment implements SensorEventListener {
+public class ShowStatusFragment extends BaseFragment implements SensorEventListener{//implements SensorEventListener {
 
     TextView textView;
     TextView textView2;
@@ -25,6 +25,8 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     private Sensor lightSensor;
     private String light = "";
     ///
+
+    Toast mToast;
 
     @Nullable
     @Override
@@ -69,6 +71,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
             }
         });
     }
+
     ///조도
     @Override
     public void onResume() {
@@ -78,15 +81,16 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     ///
     public void onClickButtonSend4(View view) {
         ConnectedThread connectedThread = getConnectedThread();
-
         if (connectedThread != null && model.getStatus().getValue() != 1) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write("cb");
-            Toast.makeText(requireActivity(), "해당밝기로 설정합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "해당밝기로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write("cbc");
-            Toast.makeText(requireActivity(), "해당밝기 설정을 중지합니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "해당밝기 설정을 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
@@ -95,11 +99,18 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         ConnectedThread connectedThread = getConnectedThread();
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write(light);
             textView2.setText(String.format("현재 주위의 밝기는 %d 입니다.", light));
         }
+
+        else if (connectedThread != null && model.getStatus().getValue() != 0) {
+            if( mToast != null ) { mToast.cancel(); }
+            textView2.setText(String.format("주위 밝기 측정을 중단합니다.", light));
+        }
     }
-    ////조도
+
+        ////조도
     @Override
     public void onSensorChanged(SensorEvent event) {
         if( event.sensor.getType() == Sensor.TYPE_LIGHT){
@@ -113,6 +124,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     }
     /////
 }
+
 
 
 /*
