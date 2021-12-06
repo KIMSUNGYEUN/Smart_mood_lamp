@@ -27,6 +27,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private ArrayAdapter<String> btArrayAdapter;
     private List<Pair<String, String>> btAddressNameList;
 
+    Toast mToast;
+
 
     @Nullable
     @Override
@@ -98,13 +100,15 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         ConnectedThread connectedThread = getConnectedThread();
 
         if (connectedThread != null && model.getStatus().getValue() != 1) {
+            if( mToast != null ) { mToast.cancel(); }
             connectedThread.write("o");
-            Toast.makeText(requireActivity(), "자동 조절 중입니다.", Toast.LENGTH_SHORT).show();
+            mToast.makeText(requireActivity(), "자동 조절 중입니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
         } else if (connectedThread != null && model.getStatus().getValue() != 0) {
-            connectedThread.write("oc");
-            Toast.makeText(requireActivity(), "자동 조절을 중지합니다.", Toast.LENGTH_SHORT).show();
+            if( mToast != null ) { mToast.cancel(); }
+            connectedThread.write("c");
+            mToast.makeText(requireActivity(), "자동 조절을 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
         }
     }
