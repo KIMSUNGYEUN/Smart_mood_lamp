@@ -110,7 +110,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         }
     }
 
-        ////조도
+        /////조도
     @Override
     public void onSensorChanged(SensorEvent event) {
         if( event.sensor.getType() == Sensor.TYPE_LIGHT){
