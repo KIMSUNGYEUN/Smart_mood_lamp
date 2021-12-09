@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,12 +20,14 @@ import androidx.annotation.Nullable;
 public class ShowStatusFragment extends BaseFragment implements SensorEventListener{//implements SensorEventListener {
 
     TextView textView;
-    TextView textView2;
+    //TextView textView2;
     ///조도
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private String light = "";
     ///
+    private int imageIndex;
+    private ImageView imageView1, imageView2;
 
     Toast mToast;
 
@@ -39,11 +42,15 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        imageView1 = view.findViewById(R.id.afternoon);
+        imageView2 = view.findViewById(R.id.night);
+        imageIndex = 0;
+
         view.findViewById(R.id.setting).setOnClickListener(this::onClickButtonSend4);
-        view.findViewById(R.id.check).setOnClickListener(this::onClickButtonSend5);
+        //view.findViewById(R.id.check).setOnClickListener(this::onClickButtonSend5);
 
         textView = view.findViewById(R.id.textView);
-        textView2 = view.findViewById(R.id.textView2);
+        //textView2 = view.findViewById(R.id.textView2);
 
         SeekBar seekBar = view.findViewById(R.id.seekBar);
 
@@ -95,6 +102,20 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         }
     }
 
+    public void onClickButtonSend1(View view) {
+        ConnectedThread connectedThread = getConnectedThread();
+        if(connectedThread != null){
+            imageView1.setVisibility(View.VISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            model.setStatus(1);
+
+        } else{
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.VISIBLE);
+            model.setStatus(0);
+        }
+    }
+    /*
     public void onClickButtonSend5(View view) {
         ConnectedThread connectedThread = getConnectedThread();
 
@@ -108,9 +129,8 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
             if( mToast != null ) { mToast.cancel(); }
             textView2.setText(String.format("주위 밝기 측정을 중단합니다.", light));
         }
-    }
-
-        /////조도
+    }*/
+        ////조도
     @Override
     public void onSensorChanged(SensorEvent event) {
         if( event.sensor.getType() == Sensor.TYPE_LIGHT){
@@ -124,6 +144,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     }
     /////
 }
+
 
 
 
