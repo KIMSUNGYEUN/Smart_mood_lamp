@@ -20,11 +20,10 @@ import androidx.annotation.Nullable;
 public class ShowStatusFragment extends BaseFragment implements SensorEventListener{//implements SensorEventListener {
 
     TextView textView;
-    //TextView textView2;
     ///조도
     private SensorManager sensorManager;
     private Sensor lightSensor;
-    private String light = "";
+    private int light = 0;
     ///
     private int imageIndex;
     private ImageView imageView1, imageView2;
@@ -47,7 +46,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         imageIndex = 0;
 
         view.findViewById(R.id.setting).setOnClickListener(this::onClickButtonSend4);
-        //view.findViewById(R.id.check).setOnClickListener(this::onClickButtonSend5);
+        view.findViewById(R.id.check).setOnClickListener(this::onClickButtonSend5);
 
         textView = view.findViewById(R.id.textView);
         //textView2 = view.findViewById(R.id.textView2);
@@ -57,6 +56,15 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         ///조도센서
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        //센서 매개변수
+        //중력 센서 TYPE_GRAVITY
+        //방향 센서 TYPE_ORIENTATION
+        //조도 센서 TYPE_LIGHT
+        //자기장 센서 TYPE_MAGNETIC_FIELD
+        //압력 센서 TYPE_PRESURE
+        //자이로코프 센서 TYPE_GYROSCOPE
+        //가속도 센서 TYPE_ACCELEROMETER
+
         if( lightSensor == null )
             Toast.makeText(requireActivity(), "No Light Sensor Found!", Toast.LENGTH_SHORT).show();
         ///
@@ -73,7 +81,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                textView.setText(String.format("현재 선택된 밝기는 %d 입니다.", seekBar
+                textView.setText(String.format("현재 사용자 밝기는 %d 입니다.", seekBar
                         .getProgress()));
             }
         });
@@ -102,17 +110,18 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         }
     }
 
-    public void onClickButtonSend1(View view) {
+    public void onClickButtonSend5(View view) {
         ConnectedThread connectedThread = getConnectedThread();
-        if(connectedThread != null){
-            imageView1.setVisibility(View.VISIBLE);
-            imageView2.setVisibility(View.INVISIBLE);
-            model.setStatus(1);
-
-        } else{
-            imageView1.setVisibility(View.INVISIBLE);
-            imageView2.setVisibility(View.VISIBLE);
-            model.setStatus(0);
+        if(connectedThread != null) {
+            if (light < 300) {
+                imageView1.setVisibility(View.VISIBLE);
+                imageView2.setVisibility(View.INVISIBLE);
+                model.setStatus(1);
+            } else{
+                imageView1.setVisibility(View.INVISIBLE);
+                imageView2.setVisibility(View.VISIBLE);
+                model.setStatus(0);
+            }
         }
     }
     /*
@@ -134,7 +143,8 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     @Override
     public void onSensorChanged(SensorEvent event) {
         if( event.sensor.getType() == Sensor.TYPE_LIGHT){
-            light = String.valueOf(event.values[0]);
+            light = (int) event.values[0];
+            //light = String.valueOf(event.values[0]);
         }
     }
 
@@ -144,7 +154,6 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     }
     /////
 }
-
 
 
 
