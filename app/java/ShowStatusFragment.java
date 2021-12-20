@@ -27,7 +27,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
     ///
     private int imageIndex;
     private ImageView imageView1, imageView2;
-
+    private int userprogress = 0;
     Toast mToast;
 
     @Nullable
@@ -71,7 +71,9 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                textView.setText(String.format("현재 사용자 밝기는 %d 입니다.", seekBar
+                        .getProgress()));
+                userprogress = progress;
             }
 
             @Override
@@ -81,8 +83,7 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                textView.setText(String.format("현재 사용자 밝기는 %d 입니다.", seekBar
-                        .getProgress()));
+
             }
         });
     }
@@ -94,20 +95,22 @@ public class ShowStatusFragment extends BaseFragment implements SensorEventListe
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
     ///
+
     public void onClickButtonSend4(View view) {
         ConnectedThread connectedThread = getConnectedThread();
         if (connectedThread != null && model.getStatus().getValue() != 1) {
             if( mToast != null ) { mToast.cancel(); }
-            connectedThread.write("cb");
+            connectedThread.write("u");
+            connectedThread.write(String.valueOf(userprogress));
             mToast.makeText(requireActivity(), "해당밝기로 설정합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(1);
 
-        } else if (connectedThread != null && model.getStatus().getValue() != 0) {
+        } /*else if (connectedThread != null && model.getStatus().getValue() != 0) {
             if( mToast != null ) { mToast.cancel(); }
-            connectedThread.write("cbc");
+            connectedThread.write("s");
             mToast.makeText(requireActivity(), "해당밝기 설정을 중지합니다.", Toast.LENGTH_SHORT).show();
             model.setStatus(0);
-        }
+        }*/
     }
 
     public void onClickButtonSend5(View view) {
